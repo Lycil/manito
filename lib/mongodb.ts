@@ -1,30 +1,30 @@
-import { MongoClient } from "mongodb"
+import { MongoClient } from "mongodb";
 
 if (!process.env.MONGODB_URI) {
-  throw new Error('Invalid/Missing environment variable: "MONGODB_URI"')
+  throw new Error('Invalid/Missing environment variable: "MONGODB_URI"');
 }
 
-const uri = process.env.MONGODB_URI
-const options = {}
+const uri = process.env.MONGODB_URI;
+const options = {};
 
-let client
-let clientPromise: Promise<MongoClient>
-
-declare global {
-  var _mongoClientPromise: Promise<MongoClient> | undefined
-}
+let client;
+let clientPromise: Promise<MongoClient>;
 
 if (process.env.NODE_ENV === "development") {
-  // 개발 모드: 전역 변수 사용
-  if (!global._mongoClientPromise) {
-    client = new MongoClient(uri, options)
-    global._mongoClientPromise = client.connect()
+  // 개발 모드에서는 전역 변수에 연결을 저장해서 재사용 (HMR 대응)
+  const globalWithMongo = global as typeof globalThis & {
+    _mongoClientPromise?: Promise<MongoClient>;
+  };
+
+  if (!globalWithMongo._mongoClientPromise) {
+    client = new MongoClient(uri, options);
+    globalWithMongo._mongoClientPromise = client.connect();
   }
-  clientPromise = global._mongoClientPromise
+  clientPromise = globalWithMongo._mongoClientPromise;
 } else {
-  // 배포 모드: 새 연결 생성
-  client = new MongoClient(uri, options)
-  clientPromise = client.connect()
+  // 프로덕션(Vercel) 모드에서는 전역 변수 안 씀
+  client = new MongoClient(uri, options);
+  clientPromise = client.connect();
 }
 
-export default clientPromise
+export default clientPromise;
