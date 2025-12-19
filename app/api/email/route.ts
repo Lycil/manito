@@ -8,7 +8,8 @@ export async function DELETE(request: Request) {
   try {
     // 1. 로그인 체크
     const session = await getServerSession(authOptions);
-    if (!session) {
+    
+    if (!session || !session.user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
@@ -25,7 +26,7 @@ export async function DELETE(request: Request) {
     // 3. 삭제 수행
     const deletedEmail = await Email.findOneAndDelete({
       _id: emailId,
-      owner: session.user.id, 
+      owner: session.user.id,
     });
 
     if (!deletedEmail) {
