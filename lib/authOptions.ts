@@ -4,7 +4,8 @@ import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 import clientPromise from "@/lib/mongodb";
 
 export const authOptions: NextAuthOptions = {
-secret: "manito_secret_key_12345",
+  secret: process.env.NEXTAUTH_SECRET, 
+  
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
@@ -22,7 +23,6 @@ secret: "manito_secret_key_12345",
     async session({ session, token }) {
       if (session.user && token.sub) {
         session.user.image = token.picture;
-        // @ts-ignore
         session.user.id = token.sub; 
       }
       return session;
