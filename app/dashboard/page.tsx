@@ -48,22 +48,20 @@ export default async function DashboardPage({
 
   return (
     <div className="flex h-screen bg-gray-100 overflow-hidden justify-center">
-      
-      {/* 실제 앱 컨테이너 */}
+
       <div className="flex w-full max-w-screen-2xl h-full bg-white shadow-2xl overflow-hidden border-x border-gray-200">
         
-        {/* 🟢 왼쪽 사이드바 */}
+        {/* 왼쪽 사이드바 */}
         <aside className={`
           w-full md:w-80 bg-white border-r flex-col
           ${selectedId ? 'hidden md:flex' : 'flex'} 
         `}>
-          {/* 👇 [수정] 헤더 부분: 로고와 로그아웃 버튼을 양옆으로 배치 */}
           <div className="p-6 border-b">
             <div className="flex items-center justify-between mb-2">
               <h1 className="text-xl font-bold flex items-center gap-2">
                 <Mail className="text-primary" /> Manito
               </h1>
-              {/* 로그아웃 버튼 배치 */}
+              {/* 로그아웃 버튼 */}
               <LogoutButton />
             </div>
             <p className="text-sm text-gray-500">{session.user?.name} 님의 메일함</p>
@@ -109,13 +107,13 @@ export default async function DashboardPage({
             
             {addresses.length === 0 && (
               <div className="text-center text-gray-400 py-10 text-sm">
-                주소를 먼저 생성해주세요.
+                주소를 먼저 생성해 주세요.
               </div>
             )}
           </div>
         </aside>
 
-        {/* 🔵 오른쪽 메인 콘텐츠 */}
+        {/* 메인 컨테이너 */}
         <main className={`
           flex-1 flex-col overflow-hidden bg-gray-50/50
           ${selectedId ? 'flex' : 'hidden md:flex'}
@@ -174,8 +172,7 @@ export default async function DashboardPage({
                   </div>
                 )}
               </div>
-              {/* <TestMailButton addressId={selectedId!} /> */} 
-              {/* 위 버튼은 중복이라 제거해도 될 듯! (이미 빈 화면일 때랑 모바일용으로 넣어뒀으니까) */}
+              <TestMailButton addressId={selectedId!} /> 
             </>
           ) : (
             <div className="flex flex-col items-center justify-center h-full text-gray-400 p-4 text-center">

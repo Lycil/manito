@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
-import { Noto_Sans_KR } from "next/font/google"; // 구글 폰트 가져오기
 import localFont from "next/font/local"
 import "./globals.css";
-import AuthProvider from "@/components/SessionProvider"; // 방금 만든 거 import
+import AuthProvider from "@/components/SessionProvider";
 
-// 폰트 설정 (한글 예쁘게!)
+// Pretendard 폰트
 const pretendard = localFont({
   src: "./fonts/PretendardVariable.woff2",
   display: "swap",
@@ -25,7 +24,6 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={pretendard.variable}>
-        {/* 나중에 여기에 네비게이션 바(헤더)를 넣으면 좋아 */}
         <main className="min-h-screen bg-gray-50 text-gray-900">
           <AuthProvider>{children}</AuthProvider>
         </main>
