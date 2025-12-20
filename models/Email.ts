@@ -17,6 +17,15 @@ const EmailSchema = new mongoose.Schema({
   importanceReason: { type: String }, // 판단 이유
 });
 
+// 불필요한 메일 30일 후 삭제
+EmailSchema.index(
+  { receivedAt: 1 }, 
+  { 
+    expireAfterSeconds: 2592000, 
+    partialFilterExpression: { isImportant: false } 
+  }
+);
+
 // 모델이 이미 있으면 재사용, 없으면 생성
 const Email = mongoose.models.Email || mongoose.model("Email", EmailSchema);
 
