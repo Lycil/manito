@@ -10,7 +10,7 @@ export default async function Home() {
   const session = await getServerSession(authOptions); 
 
   return (
-    <div className="h-screen bg-gray-100 dark:bg-zinc-950 flex flex-col items-center transition-colors duration-300 overflow-hidden">
+    <div className="h-screen bg-gray-100 dark:bg-zinc-950 flex flex-col items-center transition-colors duration-300">
       
       <SiteHeader session={session} />
       
