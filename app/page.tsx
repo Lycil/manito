@@ -39,8 +39,8 @@ export default async function Home() {
                      반가워요, {session.user?.name} 님!
                    </p>
                    <Button asChild size="lg" className="text-lg h-12 px-12 shadow-lg rounded-full">
-                    <Link href="/dashboard">
-                      대시보드 바로가기 <ArrowRight className="ml-2" />
+                    <Link href="/mailbox">
+                      내 메일함 바로가기 <ArrowRight className="ml-2" />
                     </Link>
                   </Button>
                 </div>

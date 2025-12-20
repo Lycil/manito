@@ -49,7 +49,7 @@ export default async function DashboardDetailPage({
         `}>
           <div className="flex items-center gap-2 overflow-hidden">
             
-            <Link href="/dashboard" className="md:hidden mr-1">
+            <Link href="/mailbox" className="md:hidden mr-1">
               <Button variant="ghost" size="icon" className="-ml-2">
                 <ArrowLeft className="h-5 w-5 dark:text-gray-200" />
               </Button>

@@ -23,7 +23,7 @@ export default function DeleteAddressButton({ addressId }: { addressId: string }
 
             if (res.ok) {
                 if (pathname.includes(addressId)) {
-                    router.push('/dashboard');
+                    router.push('/mailbox');
                 }
 
                 router.refresh();

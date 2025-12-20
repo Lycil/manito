@@ -16,7 +16,7 @@ interface Props {
 
 export default function SidebarItem({ addr }: Props) {
   const pathname = usePathname();
-  const isSelected = pathname === `/dashboard/${addr._id}`;
+  const isSelected = pathname === `/mailbox/${addr._id}`;
 
   return (
     <div
@@ -28,7 +28,7 @@ export default function SidebarItem({ addr }: Props) {
       `}
     >
       <Link 
-        href={`/dashboard/${addr._id}`} 
+        href={`/mailbox/${addr._id}`} 
         className="absolute inset-0 z-10"
         prefetch={false}
       />
