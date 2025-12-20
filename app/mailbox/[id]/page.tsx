@@ -9,10 +9,10 @@ import { Inbox, ArrowLeft } from "lucide-react";
 import dbConnect from "@/lib/dbConnect";
 import VirtualAddress from "@/models/VirtualAddress";
 import Email from "@/models/Email";
-import TestMailButton from "@/components/TestMailButton";
-import EmailDetailModal from "@/components/EmailDetailModal";
-import RefreshButton from "@/components/RefreshButton";
-import AddressCopyButton from "@/components/AddressCopyButton";
+import TestMailButton from "@/components/mailbox/TestMailButton";
+import EmailDetailModal from "@/components/mailbox/EmailDetailModal";
+import RefreshButton from "@/components/mailbox/RefreshButton";
+import AddressCopyButton from "@/components/mailbox/AddressCopyButton";
 
 export default async function DashboardDetailPage({
   params,

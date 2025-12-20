@@ -4,12 +4,12 @@ import { redirect } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { User, Mail, Shield, ArrowLeft } from "lucide-react";
-import LogoutButton from "@/components/LogoutButton";
+import LogoutButton from "@/components/auth/LogoutButton";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import SiteHeader from "@/components/SiteHeader";
-import ProfileEditDialog from "@/components/ProfileEditDialog";
+import SiteHeader from "@/components/layout/SiteHeader";
+import ProfileEditDialog from "@/components/auth/ProfileEditDialog";
 
 export default async function MyPage() {
   const session = await getServerSession(authOptions);

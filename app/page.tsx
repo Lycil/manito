@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ShieldCheck, Bot, Leaf, ArrowRight, Mail } from "lucide-react";
 import { getServerSession } from "next-auth"; 
 import { authOptions } from "@/lib/authOptions";
-import SiteHeader from "@/components/SiteHeader"; 
+import SiteHeader from "@/components/layout/SiteHeader"; 
 
 export default async function Home() {
   const session = await getServerSession(authOptions); 

@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import DeleteAddressButton from "@/components/DeleteAddressButton";
-import EditMemoButton from "@/components/EditMemoButton";
+import DeleteAddressButton from "@/components/mailbox/DeleteAddressButton";
+import EditMemoButton from "@/components/mailbox/EditMemoButton";
 
 interface Props {
   addr: {
