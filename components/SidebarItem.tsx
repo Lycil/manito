@@ -41,7 +41,7 @@ export default function SidebarItem({ addr }: Props) {
                ? "text-indigo-700 dark:text-indigo-300" 
                : "text-gray-700 dark:text-gray-300"}
            `}>
-             {addr.fullAddress}
+             {addr.fullAddress.split("@")[0]}
            </span>
            <p className="text-xs text-gray-500 dark:text-gray-500 truncate">
              {addr.memo || "메모 없음"}
