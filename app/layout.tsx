@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local"
 import "./globals.css";
 import AuthProvider from "@/components/SessionProvider";
+import { ThemeProvider } from "@/components/theme-provider";
 
 // Pretendard 폰트
 const pretendard = localFont({
@@ -26,11 +27,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
+    <html lang="ko" suppressHydrationWarning>
       <body className={pretendard.variable}>
-        <main className="min-h-screen bg-gray-50 text-gray-900">
-          <AuthProvider>{children}</AuthProvider>
-        </main>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <main className="min-h-screen bg-gray-50 text-gray-900 dark:bg-zinc-950 dark:text-gray-100 transition-colors">
+            <AuthProvider>
+              {children}
+            </AuthProvider>
+          </main>
+        </ThemeProvider>
       </body>
     </html>
   );
