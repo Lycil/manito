@@ -14,7 +14,7 @@ export default async function Home() {
       
       <SiteHeader session={session} />
       
-      <main className="flex-1 w-full overflow-y-auto">
+      <main className="flex-1 w-full">
         <div className="flex flex-col items-center justify-center w-full">
           
           <section className="w-full py-24 lg:py-32 flex flex-col items-center text-center px-4 animate-in fade-in duration-500">
