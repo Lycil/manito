@@ -10,6 +10,11 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Separator } from "@/components/ui/separator";
 import SiteHeader from "@/components/layout/SiteHeader";
 import ProfileEditDialog from "@/components/auth/ProfileEditDialog";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Manito - 마이페이지",
+};
 
 export default async function MyPage() {
   const session = await getServerSession(authOptions);

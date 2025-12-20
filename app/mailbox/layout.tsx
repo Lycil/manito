@@ -7,6 +7,11 @@ import VirtualAddress from "@/models/VirtualAddress";
 import CreateAddressButton from "@/components/mailbox/CreateAddressButton";
 import SidebarItem from "@/components/mailbox/SidebarItem";
 import DashboardLayoutClient from "@/components/mailbox/DashboardLayoutClient";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Manito - 내 메일함",
+};
 
 export default async function DashboardLayout({
   children,
