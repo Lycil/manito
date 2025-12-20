@@ -32,7 +32,7 @@ export default function SiteHeader({ session }: SiteHeaderProps) {
         <Link href="/mailbox" className="hidden md:block"> 
           <Button variant="ghost" size="sm" className="text-gray-600 dark:text-gray-300 font-medium">
             <Mail className="w-4 h-4 mr-2" />
-            메일함
+            내 메일함
           </Button>
         </Link>
       </div>
