@@ -10,7 +10,8 @@ import dbConnect from "@/lib/dbConnect";
 import VirtualAddress from "@/models/VirtualAddress";
 import Email from "@/models/Email";
 import TestMailButton from "@/components/TestMailButton";
-import EmailDetailModal from "@/components/EmailDetailModal"; 
+import EmailDetailModal from "@/components/EmailDetailModal";
+import RefreshButton from "@/components/RefreshButton";
 
 export default async function DashboardDetailPage({
   params,
@@ -62,9 +63,7 @@ export default async function DashboardDetailPage({
             </Badge>
           </div>
           <div className="flex items-center">
-            <Button variant="ghost" size="icon" className="dark:text-gray-400 hover:bg-black/5 dark:hover:bg-white/10">
-              <RefreshCcw className="h-4 w-4" />
-            </Button>
+            <RefreshButton />
           </div>
         </header>
 
