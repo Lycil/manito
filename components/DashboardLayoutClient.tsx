@@ -10,7 +10,7 @@ export default function DashboardLayoutClient({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const isMainPage = pathname === "/dashboard";
+  const isMainPage = pathname === "/mailbox";
 
   return (
     <div className="flex w-full max-w-screen-2xl h-full bg-white dark:bg-zinc-900 shadow-xl rounded-3xl overflow-hidden border border-gray-200 dark:border-zinc-800 transition-colors duration-300">
