@@ -20,10 +20,26 @@ export const authOptions: NextAuthOptions = {
     signIn: "/login",
   },
   callbacks: {
+    async jwt({ token, user, trigger, session }) {
+      // 처음 로그인 시 유저 ID를 토큰에 저장
+      if (user) {
+        token.id = user.id;
+      }
+
+      if (trigger === "update" && session) {
+        if (session.name) token.name = session.name;
+        if (session.email) token.email = session.email;
+      }
+
+      return token;
+    },
+
     async session({ session, token }) {
-      if (session.user && token.sub) {
-        session.user.image = token.picture;
-        session.user.id = token.sub; 
+      if (session.user) {
+        session.user.id = token.id as string;
+        session.user.name = token.name;
+        session.user.email = token.email;
+        session.user.image = token.picture as string;
       }
       return session;
     },
