@@ -16,8 +16,12 @@ export default function LoginPage() {
         <div className='min-h-screen flex flex-col items-center bg-gray-100 dark:bg-zinc-950 transition-colors'>
             <SiteHeader session={null} />
 
-            <main className='flex-1 flex items-center justify-center w-full px-4 pb-20'>
-                <Card className='w-full max-w-md border-2 shadow-xl bg-white dark:bg-zinc-900 dark:border-zinc-800'>
+            <main className='flex-1 flex items-center justify-center w-full px-4 pb-40'>
+                <Card className='
+                    w-full max-w-md border-2 shadow-xl 
+                    bg-white dark:bg-zinc-900 dark:border-zinc-800
+                    -mt-16
+                '>
                     <CardHeader className='space-y-1 text-center'>
                         <div className='flex justify-center mb-4'>
                             <div className='p-3 rounded-full bg-indigo-100 dark:bg-indigo-900/30 text-primary'>
