@@ -38,13 +38,13 @@ export default function EmailDetailModal({ mail }: { mail: EmailData }) {
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Card className={`
-          hover:shadow-md transition-all cursor-pointer mb-3 border-l-4 
+          hover:shadow-md transition-all cursor-pointer py-2 gap-1 border-l-4 
           ${mail.isImportant ? "border-l-red-500 dark:border-l-red-500" : "border-l-transparent hover:border-l-primary"}
           bg-white dark:bg-zinc-900 border-gray-200 dark:border-zinc-800
         `}>
           <CardHeader className="flex flex-row items-start justify-between p-3 pb-1">
             <div className="flex flex-col gap-1 overflow-hidden mr-2 text-left w-full">
-              
+
               <div className="flex flex-wrap gap-1.5 mb-1">
                 <Badge 
                   variant={mail.isImportant ? "destructive" : "secondary"} 
@@ -72,7 +72,7 @@ export default function EmailDetailModal({ mail }: { mail: EmailData }) {
                 )}
               </div>
 
-              <CardTitle className="text-base md:text-lg font-bold truncate text-gray-900 dark:text-gray-100 w-full">
+              <CardTitle className="text-base md:text-xl font-bold truncate text-gray-900 dark:text-gray-100 w-full">
                 {mail.subject}
               </CardTitle>
               <CardDescription className="text-xs md:text-sm truncate text-gray-500 dark:text-gray-400">
