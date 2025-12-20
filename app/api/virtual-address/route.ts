@@ -32,7 +32,7 @@ export async function POST() {
     });
 
     // 중복 방지용 숫자 생성
-    const randomNumber = Math.floor(Math.random() * 900) + 100;
+    const randomNumber = Math.floor(Math.random() * 90) + 10;
 
     const localPart = `${randomName}-${randomNumber}`;
     const fullAddress = `${localPart}@manito.kr`;
