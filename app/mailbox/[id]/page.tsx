@@ -12,6 +12,7 @@ import Email from "@/models/Email";
 import TestMailButton from "@/components/TestMailButton";
 import EmailDetailModal from "@/components/EmailDetailModal";
 import RefreshButton from "@/components/RefreshButton";
+import AddressCopyButton from "@/components/AddressCopyButton";
 
 export default async function DashboardDetailPage({
   params,
@@ -55,9 +56,7 @@ export default async function DashboardDetailPage({
               </Button>
             </Link>
 
-            <h2 className="text-base md:text-lg font-bold text-gray-800 dark:text-gray-100 truncate max-w-[150px] md:max-w-none">
-              {selectedAddress.fullAddress}
-            </h2>
+            <AddressCopyButton address={selectedAddress.fullAddress} />
             <Badge variant="outline" className="text-xs whitespace-nowrap hidden sm:inline-flex dark:text-gray-300 dark:border-zinc-700 bg-transparent">
               {mails.length}개의 메일
             </Badge>
