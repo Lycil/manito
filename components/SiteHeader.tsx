@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Mail } from "lucide-react";
+import { Mail, Shield } from "lucide-react"; 
 import { ThemeToggle } from "@/components/ThemeToggle";
 import LogoutButton from "@/components/LogoutButton";
 import { Button } from "@/components/ui/button";
@@ -10,6 +10,9 @@ interface SiteHeaderProps {
 }
 
 export default function SiteHeader({ session }: SiteHeaderProps) {
+  const adminEmails = (process.env.ADMIN_EMAILS || "").split(",");
+  const isAdmin = session?.user?.email && adminEmails.includes(session.user.email);
+
   return (
     <header className="
       fixed top-4 left-1/2 -translate-x-1/2
@@ -26,7 +29,17 @@ export default function SiteHeader({ session }: SiteHeaderProps) {
       </div>
       
       <div className="flex items-center gap-2">
+        {isAdmin && (
+          <Link href="/admin">
+            <Button variant="ghost" size="sm" className="text-gray-600 dark:text-gray-300">
+              <Shield className="w-4 h-4 mr-1" />
+              관리자
+            </Button>
+          </Link>
+        )}
+
         <ThemeToggle />
+        
         {session ? (
           <LogoutButton />
         ) : (
