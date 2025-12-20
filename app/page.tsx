@@ -13,7 +13,7 @@ export default async function Home() {
       
       <section className="w-full py-24 lg:py-32 flex flex-col items-center text-center px-4 animate-in fade-in zoom-in duration-500">
         
-        <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight lg:text-7xl mb-6">
+        <h1 className="text-4xl md:text-6xl font-bold tracking-tight lg:text-7xl mb-6">
           <div className="mb-3">개인정보 보호를 위한</div>
           <span className="text-primary bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-purple-600">
           스마트 메일
