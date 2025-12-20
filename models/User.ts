@@ -4,8 +4,8 @@ const UserSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   image: { type: String },
-  emailVerified: { type: Date, null: true },
-  createdAt: { type: Date, default: Date.now },
+}, { 
+  timestamps: true
 });
 
 const User = mongoose.models.User || mongoose.model("User", UserSchema);
