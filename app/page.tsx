@@ -28,7 +28,7 @@ export default async function Home() {
             <p className="text-xl text-muted-foreground mb-10 max-w-2xl leading-relaxed dark:text-gray-400">
               내 진짜 이메일은 숨기고, 
               <span className="font-semibold text-foreground dark:text-gray-200"> @manito.kr </span>
-              가상 주소를 사용해 보세요!<br />
+              이메일 주소를 사용해 보세요!<br />
               스팸은 차단하고 중요한 메일만 전달해 드립니다.
             </p>
             
