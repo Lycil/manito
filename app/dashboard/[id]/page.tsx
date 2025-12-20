@@ -80,7 +80,10 @@ export default async function DashboardDetailPage({
                   receivedAt: mail.receivedAt.toISOString(),
                   summary: mail.summary,
                   text: mail.text,
-                  html: mail.html
+                  html: mail.html,
+                  isImportant: mail.isImportant,
+                  category: mail.category,
+                  importanceReason: mail.importanceReason
                 }}
               />
             ))
