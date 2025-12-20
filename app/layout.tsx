@@ -14,8 +14,8 @@ const pretendard = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Manito - 스마트 가상 이메일",
-  description: "개인정보 보호와 탄소 절감을 위한 스마트 이메일 서비스",
+  title: "Manito - 개인정보 보호를 위한 스마트 메일",
+  description: "개인정보 보호를 위한 스마트 메일, Manito 입니다.",
   robots: {
     index: false,
     follow: false,

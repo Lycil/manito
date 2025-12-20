@@ -16,8 +16,8 @@ export default function SiteHeader({ session }: SiteHeaderProps) {
 
   return (
     <header className="
-      fixed top-4 left-1/2 -translate-x-1/2
-      z-50 w-[calc(100%-2rem)] max-w-screen-2xl h-16 px-6 
+      fixed top-3 left-1/2 -translate-x-1/2
+      z-50 w-[calc(100%-1.5rem)] max-w-6xl h-16 px-6 
       rounded-full flex items-center justify-between transition-all 
       backdrop-blur-md shadow-lg
       bg-white/75 dark:bg-zinc-950/70
