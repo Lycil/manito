@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Users, Mail, MapPin } from "lucide-react";
 
-import SiteHeader from "@/components/SiteHeader"; 
+import SiteHeader from "@/components/layout/SiteHeader"; 
 
 export default function AdminPage() {
   const { data: session, status } = useSession();

@@ -1,8 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Mail, Shield, User } from "lucide-react";
-import { ThemeToggle } from "@/components/ThemeToggle";
-import LogoutButton from "@/components/LogoutButton";
+import { ThemeToggle } from "@/components/layout/ThemeToggle";
+import LogoutButton from "@/components/auth/LogoutButton";
 import { Button } from "@/components/ui/button";
 import { Session } from "next-auth";
 

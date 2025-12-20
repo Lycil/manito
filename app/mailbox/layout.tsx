@@ -1,12 +1,12 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authOptions";
 import { redirect } from "next/navigation";
-import SiteHeader from "@/components/SiteHeader";
+import SiteHeader from "@/components/layout/SiteHeader";
 import dbConnect from "@/lib/dbConnect";
 import VirtualAddress from "@/models/VirtualAddress";
-import CreateAddressButton from "@/components/CreateAddressButton";
-import SidebarItem from "@/components/SidebarItem";
-import DashboardLayoutClient from "@/components/DashboardLayoutClient";
+import CreateAddressButton from "@/components/mailbox/CreateAddressButton";
+import SidebarItem from "@/components/mailbox/SidebarItem";
+import DashboardLayoutClient from "@/components/mailbox/DashboardLayoutClient";
 
 export default async function DashboardLayout({
   children,

@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft, Mail } from 'lucide-react';
-import SiteHeader from '@/components/SiteHeader';
+import SiteHeader from '@/components/layout/SiteHeader';
 
 export default function LoginPage() {
     const handleGoogleLogin = () => {
