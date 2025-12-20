@@ -138,6 +138,50 @@ export default function AdminPage() {
               </div>
             </CardContent>
           </Card>
+
+          <Card className="dark:bg-zinc-900 dark:border-zinc-800">
+            <CardHeader>
+              <CardTitle className="dark:text-gray-100 flex items-center gap-2">
+                <Users className="w-5 h-5" /> 회원 목록
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="border rounded-md dark:border-zinc-700 overflow-hidden">
+                <table className="w-full text-sm text-left">
+                  <thead className="bg-gray-100 dark:bg-zinc-800 text-gray-500 dark:text-gray-400">
+                    <tr>
+                      <th className="p-3">가입일</th>
+                      <th className="p-3">닉네임</th>
+                      <th className="p-3">이메일</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y dark:divide-zinc-800">
+                    {stats?.allUsers && stats.allUsers.length > 0 ? (
+                      stats.allUsers.map((user: any) => (
+                        <tr key={user._id} className="hover:bg-gray-50 dark:hover:bg-zinc-800/50 transition-colors">
+                          <td className="p-3 text-gray-500 dark:text-gray-400">
+                            {user.createdAt ? new Date(user.createdAt).toLocaleDateString() : "-"}
+                          </td>
+                          <td className="p-3 font-semibold dark:text-gray-200">
+                            {user.name}
+                          </td>
+                          <td className="p-3 text-indigo-600 dark:text-indigo-400">
+                            {user.email}
+                          </td>
+                        </tr>
+                      ))
+                    ) : (
+                      <tr>
+                        <td colSpan={3} className="p-8 text-center text-gray-500">
+                          등록된 회원이 없습니다.
+                        </td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </div>

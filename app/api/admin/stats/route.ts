@@ -20,7 +20,7 @@ export async function GET() {
     await dbConnect();
 
     // 데이터 집계
-    const [userCount, addressCount, emailCount, recentEmails] = await Promise.all([
+    const [userCount, addressCount, emailCount, recentEmails, allUsers] = await Promise.all([
       User.countDocuments(),                 // 총 회원 수
       VirtualAddress.countDocuments(),       // 총 가상 주소 수
       Email.countDocuments(),                // 총 수신 메일 수
@@ -29,6 +29,7 @@ export async function GET() {
         .limit(100)
         .populate("owner", "name email")     // 메일 주인 정보
         .lean(),
+      User.find().sort({ createdAt: -1 }).select("name email createdAt").lean(),
     ]);
 
     return NextResponse.json({
@@ -38,6 +39,7 @@ export async function GET() {
         emails: emailCount,
       },
       recentEmails,
+      allUsers,
     });
 
   } catch (error) {
