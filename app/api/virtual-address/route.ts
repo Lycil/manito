@@ -3,10 +3,7 @@ import { authOptions } from "@/lib/authOptions";
 import { NextResponse } from "next/server";
 import dbConnect from "@/lib/dbConnect";
 import VirtualAddress from "@/models/VirtualAddress";
-
-function generateRandomString(length: number) {
-  return Math.random().toString(36).substring(2, 2 + length);
-}
+import { uniqueNamesGenerator, adjectives, animals } from 'unique-names-generator';
 
 export async function POST() {
   try {
@@ -28,14 +25,28 @@ export async function POST() {
       );
     }
 
-    const localPart = generateRandomString(8);
+    const randomName = uniqueNamesGenerator({
+      dictionaries: [adjectives, animals],
+      separator: '-',
+      length: 2, // 단어 2개 조합
+    });
+
+    // 중복 방지용 숫자 생성
+    const randomNumber = Math.floor(Math.random() * 900) + 100;
+
+    const localPart = `${randomName}-${randomNumber}`;
     const fullAddress = `${localPart}@manito.kr`;
+
+    const existing = await VirtualAddress.findOne({ fullAddress });
+    if (existing) {
+        return NextResponse.json({ error: "오류가 발생했습니다. 다시 시도해 주세요." }, { status: 409 });
+    }
 
     const newAddress = await VirtualAddress.create({
       owner: session.user.id,
       localPart: localPart,
       fullAddress: fullAddress,
-      memo: "새 가상 주소",
+      memo: "새 이메일 주소",
     });
 
     return NextResponse.json(newAddress);
