@@ -47,7 +47,7 @@ export default function SiteHeader({ session }: SiteHeaderProps) {
       <div className="flex items-center gap-2">
         {isAdmin && (
           <Link href="/admin">
-            <Button variant="ghost" size="sm" className="text-gray-600 dark:text-gray-300">
+            <Button variant="ghost" size="sm" className="text-gray-600 dark:text-gray-300 cursor-pointer">
               <Shield className="w-4 h-4 mr-1" />
               관리자
             </Button>
@@ -60,7 +60,7 @@ export default function SiteHeader({ session }: SiteHeaderProps) {
           <LogoutButton />
         ) : (
           <Link href="/login">
-            <Button variant="ghost" size="sm">로그인</Button>
+            <Button variant="ghost" size="sm" className="cursor-pointer">로그인</Button>
           </Link>
         )}
       </div>
