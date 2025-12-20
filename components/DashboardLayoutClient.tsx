@@ -13,7 +13,7 @@ export default function DashboardLayoutClient({
   const isMainPage = pathname === "/dashboard";
 
   return (
-    <div className="flex w-full max-w-screen-2xl h-full bg-white dark:bg-zinc-900 shadow-2xl rounded-3xl overflow-hidden border border-gray-200 dark:border-zinc-800 transition-colors duration-300">
+    <div className="flex w-full max-w-screen-2xl h-full bg-white dark:bg-zinc-900 shadow-xl rounded-3xl overflow-hidden border border-gray-200 dark:border-zinc-800 transition-colors duration-300">
       {/* 사이드바 */}
       <aside
         className={`

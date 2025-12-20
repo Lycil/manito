@@ -48,7 +48,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <main className="min-h-screen bg-gray-50 text-gray-900 dark:bg-zinc-950 dark:text-gray-100 transition-colors pt-24">
+          <main className="min-h-screen bg-gray-100 text-gray-900 dark:bg-zinc-950 dark:text-gray-100 transition-colors pt-24">
             <AuthProvider>
               {children}
             </AuthProvider>
