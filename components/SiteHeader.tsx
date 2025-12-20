@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Mail, Shield } from "lucide-react"; 
 import { ThemeToggle } from "@/components/ThemeToggle";
 import LogoutButton from "@/components/LogoutButton";
@@ -23,8 +24,8 @@ export default function SiteHeader({ session }: SiteHeaderProps) {
       border border-gray-200 dark:border-zinc-800
     ">
       <div className="flex items-center gap-2">
-        <Link href="/" className="text-xl font-bold flex items-center gap-2 dark:text-gray-100 cursor-pointer">
-          <Mail className="text-primary" /> Manito
+        <Link href="/" className="text-2xl font-bold flex items-center gap-2 dark:text-gray-100 cursor-pointer">
+          <Image src="/icon.png" height={30} width={30} alt="Manito" /> Manito
         </Link>
       </div>
       
