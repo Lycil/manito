@@ -38,14 +38,14 @@ export default async function Home() {
                    <p className="text-xl font-bold text-primary">
                      반가워요, {session.user?.name} 님!
                    </p>
-                   <Button asChild size="lg" className="text-lg h-12 px-8 shadow-lg">
+                   <Button asChild size="lg" className="text-lg h-12 px-12 shadow-lg rounded-full">
                     <Link href="/dashboard">
                       대시보드 바로가기 <ArrowRight className="ml-2" />
                     </Link>
                   </Button>
                 </div>
               ) : (
-                <Button asChild size="lg" className="text-lg h-12 px-8 shadow-lg">
+                <Button asChild size="lg" className="text-lg h-12 px-12 shadow-lg rounded-full">
                   <Link href="/login">
                     <Mail className="mr-2 h-5 w-5" /> 지금 시작하기
                   </Link>
@@ -55,7 +55,7 @@ export default async function Home() {
           </section>
 
           <section className="w-full max-w-6xl px-4 py-20 grid md:grid-cols-3 gap-6">
-            <Card className="border-2 hover:border-primary/50 transition-colors shadow-sm bg-white dark:bg-zinc-900 dark:border-zinc-800">
+            <Card className="border-2 rounded-3xl hover:border-primary/50 transition-colors shadow-sm bg-white dark:bg-zinc-900 dark:border-zinc-800">
               <CardHeader>
                 <div className="w-12 h-12 rounded-lg bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center mb-4 text-indigo-600 dark:text-indigo-400">
                   <ShieldCheck className="h-6 w-6" />
@@ -68,7 +68,7 @@ export default async function Home() {
               </CardContent>
             </Card>
 
-            <Card className="border-2 hover:border-primary/50 transition-colors shadow-sm bg-white dark:bg-zinc-900 dark:border-zinc-800">
+            <Card className="border-2 rounded-3xl hover:border-primary/50 transition-colors shadow-sm bg-white dark:bg-zinc-900 dark:border-zinc-800">
               <CardHeader>
                 <div className="w-12 h-12 rounded-lg bg-pink-100 dark:bg-pink-900/30 flex items-center justify-center mb-4 text-pink-600 dark:text-pink-400">
                   <Bot className="h-6 w-6" />
@@ -80,7 +80,7 @@ export default async function Home() {
               </CardContent>
             </Card>
 
-            <Card className="border-2 hover:border-primary/50 transition-colors shadow-sm bg-white dark:bg-zinc-900 dark:border-zinc-800">
+            <Card className="border-2 rounded-3xl hover:border-primary/50 transition-colors shadow-sm bg-white dark:bg-zinc-900 dark:border-zinc-800">
               <CardHeader>
                 <div className="w-12 h-12 rounded-lg bg-green-100 dark:bg-green-900/30 flex items-center justify-center mb-4 text-green-600 dark:text-green-400">
                   <Leaf className="h-6 w-6" />
