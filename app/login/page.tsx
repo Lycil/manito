@@ -6,8 +6,13 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft, Mail } from 'lucide-react';
 import SiteHeader from '@/components/layout/SiteHeader';
+import { useEffect } from 'react';
 
 export default function LoginPage() {
+    useEffect(() => {
+        document.title = 'Manito - 로그인';
+    }, []);
+
     const handleGoogleLogin = () => {
         signIn('google', { callbackUrl: '/' });
     };

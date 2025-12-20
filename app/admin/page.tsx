@@ -31,6 +31,8 @@ export default function AdminPage() {
   };
 
   useEffect(() => {
+    document.title = 'Manito - 관리자 대시보드';
+
     if (status === "unauthenticated") {
       router.push("/login");
       return;
