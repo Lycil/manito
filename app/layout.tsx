@@ -3,6 +3,7 @@ import localFont from "next/font/local"
 import "./globals.css";
 import AuthProvider from "@/components/SessionProvider";
 import { ThemeProvider } from "@/components/theme-provider";
+import NextTopLoader from "nextjs-toploader";
 
 // Pretendard 폰트
 const pretendard = localFont({
@@ -29,6 +30,18 @@ export default function RootLayout({
   return (
     <html lang="ko" suppressHydrationWarning>
       <body className={pretendard.variable}>
+        <NextTopLoader
+          color="#6366f1"
+          initialPosition={0.08}
+          crawlSpeed={200}
+          height={3}
+          crawl={true}
+          showSpinner={false}
+          easing="ease"
+          speed={200}
+          shadow="0 0 10px #6366f1,0 0 5px #6366f1"
+        />
+
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
