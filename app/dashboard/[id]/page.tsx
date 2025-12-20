@@ -4,7 +4,7 @@ import { redirect, notFound } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Inbox, RefreshCcw, ArrowLeft } from "lucide-react";
+import { Inbox, ArrowLeft } from "lucide-react";
 
 import dbConnect from "@/lib/dbConnect";
 import VirtualAddress from "@/models/VirtualAddress";
@@ -80,6 +80,7 @@ export default async function DashboardDetailPage({
                   receivedAt: mail.receivedAt.toISOString(),
                   summary: mail.summary,
                   text: mail.text,
+                  html: mail.html
                 }}
               />
             ))

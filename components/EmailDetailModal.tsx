@@ -7,7 +7,6 @@ import { Bot, User, Calendar } from "lucide-react";
 import DeleteEmailButton from "./DeleteEmailButton";
 import { useState } from "react";
 
-// 메일 데이터 타입 정의
 interface EmailData {
   _id: string;
   subject: string;
@@ -15,14 +14,27 @@ interface EmailData {
   receivedAt: string;
   summary?: string;
   text?: string;
+  html?: string;
+}
+
+function cleanEmailText(text: string | undefined) {
+  if (!text) return "";
+
+  return text
+    .replace(/\[.*?\]/g, "") 
+    .replace(/>/g, "")       
+    .replace(/https?:\/\/\S+/g, "") 
+    .replace(/\s+/g, " ")    
+    .trim();                 
 }
 
 export default function EmailDetailModal({ mail }: { mail: EmailData }) {
   const [isOpen, setIsOpen] = useState(false);
 
+  const previewText = cleanEmailText(mail.text);
+
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      {/* 리스트 */}
       <DialogTrigger asChild>
         <Card className={`
           hover:shadow-md transition-all cursor-pointer mb-3 border-l-4 border-l-transparent hover:border-l-primary
@@ -53,16 +65,15 @@ export default function EmailDetailModal({ mail }: { mail: EmailData }) {
                 <span className="line-clamp-2 opacity-90">{mail.summary}</span>
               </div>
             ) : (
-              <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2 mt-1.5">
-                {mail.text?.substring(0, 100)}...
+              <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2 mt-1.5 break-all">
+                {previewText.substring(0, 100) || "내용 없음"}...
               </p>
             )}
           </CardContent>
         </Card>
       </DialogTrigger>
 
-      {/* 모달 */}
-      <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto bg-white dark:bg-zinc-950 dark:border-zinc-800">
+      <DialogContent className="sm:max-w-5xl w-[95%] md:w-full max-h-[90vh] overflow-y-auto bg-white dark:bg-zinc-950 dark:border-zinc-800">
         <DialogHeader>
           <div className="flex items-center gap-2 mb-2">
             <Badge variant="outline" className="text-xs text-gray-500 dark:text-gray-400 dark:border-zinc-700">
@@ -74,7 +85,7 @@ export default function EmailDetailModal({ mail }: { mail: EmailData }) {
           <DialogTitle className="text-2xl font-bold leading-tight mb-2 text-gray-900 dark:text-gray-100">
             {mail.subject}
           </DialogTitle>
-          <div className="flex items-center text-sm text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-zinc-900 p-2 rounded-md border border-transparent dark:border-zinc-800">
+          <div className="flex items-center text-sm text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-zinc-900 p-2 rounded-md border border-transparent dark:border-zinc-800 w-fit">
             <User className="w-4 h-4 mr-2 opacity-70" />
             보낸 사람: <span className="font-semibold ml-1 text-gray-900 dark:text-gray-100">{mail.fromAddress}</span>
           </div>
@@ -92,11 +103,21 @@ export default function EmailDetailModal({ mail }: { mail: EmailData }) {
             </div>
           )}
 
-          {/* 메일 본문 섹션 */}
           <div className="space-y-2">
-            <div className="text-gray-700 dark:text-gray-300 leading-relaxed min-h-[100px] p-2">
-              {mail.text || "본문 내용이 없습니다."}
-            </div>
+            {mail.html ? (
+              <div 
+                className="
+                  prose max-w-none p-6 rounded-lg border bg-white text-black overflow-x-auto
+                  [&_img]:max-w-full [&_img]:h-auto
+                  [&_table]:w-full [&_table]:max-w-full
+                "
+                dangerouslySetInnerHTML={{ __html: mail.html }} 
+              />
+            ) : (
+              <div className="text-gray-700 dark:text-gray-300 leading-relaxed min-h-[100px] p-2 whitespace-pre-wrap">
+                {mail.text || "본문 내용이 없습니다."}
+              </div>
+            )}
           </div>
         </div>
       </DialogContent>
