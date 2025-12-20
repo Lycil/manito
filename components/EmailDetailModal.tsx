@@ -3,7 +3,7 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Bot, User, Calendar } from "lucide-react";
+import { Bot, User, Calendar, AlertCircle, Tag, Info, CheckCircle2 } from "lucide-react";
 import DeleteEmailButton from "./DeleteEmailButton";
 import { useState } from "react";
 
@@ -15,11 +15,13 @@ interface EmailData {
   summary?: string;
   text?: string;
   html?: string;
+  isImportant?: boolean;
+  category?: string;
+  importanceReason?: string;
 }
 
 function cleanEmailText(text: string | undefined) {
   if (!text) return "";
-
   return text
     .replace(/\[.*?\]/g, "") 
     .replace(/>/g, "")       
@@ -30,25 +32,54 @@ function cleanEmailText(text: string | undefined) {
 
 export default function EmailDetailModal({ mail }: { mail: EmailData }) {
   const [isOpen, setIsOpen] = useState(false);
-
   const previewText = cleanEmailText(mail.text);
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Card className={`
-          hover:shadow-md transition-all cursor-pointer mb-3 border-l-4 border-l-transparent hover:border-l-primary
+          hover:shadow-md transition-all cursor-pointer mb-3 border-l-4 
+          ${mail.isImportant ? "border-l-red-500 dark:border-l-red-500" : "border-l-transparent hover:border-l-primary"}
           bg-white dark:bg-zinc-900 border-gray-200 dark:border-zinc-800
         `}>
           <CardHeader className="flex flex-row items-start justify-between p-3 pb-1">
-            <div className="flex flex-col gap-0.5 overflow-hidden mr-2 text-left">
-              <CardTitle className="text-base md:text-lg font-bold truncate text-gray-900 dark:text-gray-100">
+            <div className="flex flex-col gap-1 overflow-hidden mr-2 text-left w-full">
+              
+              <div className="flex flex-wrap gap-1.5 mb-1">
+                <Badge 
+                  variant={mail.isImportant ? "destructive" : "secondary"} 
+                  className={`
+                    h-5 px-1.5 text-[10px] font-normal flex items-center gap-0.5
+                    ${!mail.isImportant && "bg-gray-100 dark:bg-zinc-800 text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-zinc-700"}
+                  `}
+                >
+                  {mail.isImportant ? (
+                    <>
+                      <AlertCircle className="w-3 h-3" /> 중요도 높음
+                    </>
+                  ) : (
+                    <>
+                      <CheckCircle2 className="w-3 h-3 opacity-70" /> 일반 메일
+                    </>
+                  )}
+                </Badge>
+
+                {/* 카테고리 */}
+                {mail.category && (
+                  <Badge variant="outline" className="h-5 px-1.5 text-[10px] font-normal text-indigo-600 dark:text-indigo-300 border-indigo-100 dark:border-indigo-900 bg-indigo-50 dark:bg-indigo-950/30">
+                    <Tag className="w-3 h-3 mr-0.5 opacity-70" /> {mail.category}
+                  </Badge>
+                )}
+              </div>
+
+              <CardTitle className="text-base md:text-lg font-bold truncate text-gray-900 dark:text-gray-100 w-full">
                 {mail.subject}
               </CardTitle>
               <CardDescription className="text-xs md:text-sm truncate text-gray-500 dark:text-gray-400">
                 {mail.fromAddress}
               </CardDescription>
             </div>
+            
             <div className="flex flex-col items-end gap-1 shrink-0">
               <span className="text-[10px] md:text-xs text-gray-400 dark:text-zinc-500 whitespace-nowrap">
                 {new Date(mail.receivedAt).toLocaleDateString()}
@@ -56,6 +87,7 @@ export default function EmailDetailModal({ mail }: { mail: EmailData }) {
               <DeleteEmailButton emailId={mail._id} />
             </div>
           </CardHeader>
+
           <CardContent className="p-3 pt-0 text-left">
             {mail.summary ? (
               <div className="bg-indigo-50 dark:bg-indigo-900/30 p-2.5 rounded-md text-sm text-indigo-900 dark:text-indigo-200 whitespace-pre-line mt-1.5 transition-colors">
@@ -80,6 +112,11 @@ export default function EmailDetailModal({ mail }: { mail: EmailData }) {
               <Calendar className="w-3 h-3 mr-1" />
               {new Date(mail.receivedAt).toLocaleString()}
             </Badge>
+            {mail.category && (
+              <Badge variant="secondary" className="text-xs dark:bg-zinc-800">
+                {mail.category}
+              </Badge>
+            )}
           </div>
 
           <DialogTitle className="text-2xl font-bold leading-tight mb-2 text-gray-900 dark:text-gray-100">
@@ -92,13 +129,45 @@ export default function EmailDetailModal({ mail }: { mail: EmailData }) {
         </DialogHeader>
 
         <div className="space-y-6 mt-4">
-          {mail.summary && (
-            <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-100 dark:border-indigo-900/50 rounded-lg p-4 shadow-sm">
-              <h3 className="font-bold text-indigo-700 dark:text-indigo-300 flex items-center gap-2 mb-3">
-                <Bot className="w-5 h-5" /> AI 3줄 요약
+          {/* AI 분석 */}
+          {(mail.summary || mail.importanceReason) && (
+            <div className="bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-100 dark:border-indigo-900/50 rounded-lg p-5 shadow-sm">
+              <h3 className="font-bold text-indigo-700 dark:text-indigo-300 flex items-center gap-2 mb-4 text-lg">
+                <Bot className="w-5 h-5" /> AI 분석
               </h3>
-              <div className="text-indigo-900 dark:text-indigo-100 leading-relaxed whitespace-pre-line">
-                {mail.summary}
+
+              <div className="space-y-4">
+                <div className="flex flex-wrap gap-2 items-center">
+                  <Badge variant={mail.isImportant ? "destructive" : "secondary"} className={`text-sm py-1 px-3 ${!mail.isImportant && "bg-gray-200 dark:bg-zinc-800 text-gray-600 dark:text-gray-400 hover:bg-gray-300"}`}>
+                    {mail.isImportant ? (
+                      <><AlertCircle className="w-3.5 h-3.5 mr-1.5" /> 중요도 높음</>
+                    ) : (
+                      <><CheckCircle2 className="w-3.5 h-3.5 mr-1.5" /> 일반 메일</>
+                    )}
+                  </Badge>
+                  
+                  {mail.category && (
+                    <Badge variant="outline" className="text-sm py-1 px-3 bg-white dark:bg-zinc-900 text-indigo-600 dark:text-indigo-300 border-indigo-200 dark:border-indigo-800">
+                      <Tag className="w-3.5 h-3.5 mr-1.5" /> {mail.category}
+                    </Badge>
+                  )}
+                </div>
+
+                {mail.importanceReason && (
+                  <div className="flex items-start gap-2 text-sm bg-white/60 dark:bg-black/20 p-3 rounded-md border border-indigo-100/50 dark:border-indigo-900/30">
+                    <Info className="w-4 h-4 text-indigo-500 mt-0.5 shrink-0" />
+                    <span className="text-indigo-900 dark:text-indigo-200 leading-snug">
+                      <span className="font-semibold mr-1">AI 판단:</span>
+                      {mail.importanceReason}
+                    </span>
+                  </div>
+                )}
+
+                {mail.summary && (
+                  <div className="text-indigo-900 dark:text-indigo-100 leading-relaxed whitespace-pre-line pl-1">
+                    {mail.summary}
+                  </div>
+                )}
               </div>
             </div>
           )}
