@@ -17,7 +17,7 @@ export default async function DashboardLayout({
   if (!session) redirect("/login");
 
   await dbConnect();
-  const addresses = await VirtualAddress.find({ owner: session.user.id }).sort({ createdAt: -1 });
+  const addresses = await VirtualAddress.find({ owner: session.user.id }).sort({ createdAt: 1 });
 
   // 사이드바
   const sidebarContent = (
