@@ -3,6 +3,7 @@ import dbConnect from "@/lib/dbConnect";
 import VirtualAddress from "@/models/VirtualAddress";
 import Email from "@/models/Email";
 import { simpleParser } from "mailparser";
+import { analyzeEmail } from "@/lib/gemini";
 
 const SECRET_KEY = process.env.EMAIL_WEBHOOK_SECRET;
 
@@ -38,6 +39,10 @@ export async function POST(request: Request) {
       return NextResponse.json({ message: "Address not found" }, { status: 200 });
     }
 
+    console.log(`AI 분석 시작: ${subject}`);
+    const aiResult = await analyzeEmail(sender, subject, textBody);
+    console.log("AI 분석 완료:", aiResult);
+
     // DB 저장
     await Email.create({
       owner: targetAddress.owner,
@@ -49,6 +54,10 @@ export async function POST(request: Request) {
       html: htmlBody,
       receivedAt: new Date(),
       isRead: false,
+      summary: aiResult?.summary || "요약 실패",
+      isImportant: aiResult?.isImportant || false,
+      category: aiResult?.category || "기타",
+      importanceReason: aiResult?.reason || "분석 불가",
     });
 
     console.log(`메일 저장 완료 "${subject}"`);
