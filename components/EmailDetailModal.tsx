@@ -94,8 +94,7 @@ export default function EmailDetailModal({ mail }: { mail: EmailData }) {
 
           {/* 메일 본문 섹션 */}
           <div className="space-y-2">
-            <h3 className="font-semibold text-gray-900 dark:text-gray-100 text-lg border-b dark:border-zinc-800 pb-2">메일 본문</h3>
-            <div className="text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-wrap min-h-[100px] p-2">
+            <div className="text-gray-700 dark:text-gray-300 leading-relaxed min-h-[100px] p-2">
               {mail.text || "본문 내용이 없습니다."}
             </div>
           </div>
