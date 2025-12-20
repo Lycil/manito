@@ -54,7 +54,7 @@ export default async function DashboardLayout({
   return (
     <div className="flex flex-col h-screen bg-gray-100 dark:bg-zinc-950 overflow-hidden items-center transition-colors duration-300">
       <SiteHeader session={session} />
-      <div className="flex-1 w-full max-w-screen-2xl overflow-hidden p-4 pt-24">
+      <div className="flex-1 w-full max-w-screen-2xl overflow-hidden p-4 pt-4">
         <DashboardLayoutClient sidebar={sidebarContent}>
            {children}
         </DashboardLayoutClient>
