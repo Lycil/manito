@@ -73,10 +73,10 @@ export default async function Home() {
                 <div className="w-12 h-12 rounded-lg bg-pink-100 dark:bg-pink-900/30 flex items-center justify-center mb-4 text-pink-600 dark:text-pink-400">
                   <Bot className="h-6 w-6" />
                 </div>
-                <CardTitle className="text-xl dark:text-gray-100">이메일 자동 분류</CardTitle>
+                <CardTitle className="text-xl dark:text-gray-100">이메일 자동 분석</CardTitle>
               </CardHeader>
               <CardContent className="text-muted-foreground dark:text-gray-400">
-                꼭 필요한 메일만 전달하고, 불필요한 메일은 자동으로 필터링합니다.
+                이메일의 중요도를 분석하여 중요한 메일만 전달해 드립니다. 긴 메일 내용을 요약해서 한눈에 확인할 수도 있습니다.
               </CardContent>
             </Card>
 
