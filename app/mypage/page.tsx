@@ -34,15 +34,6 @@ export default async function MyPage() {
       
       <SiteHeader session={session} />
 
-      <div className="w-full max-w-md mb-4">
-        <Link href="/">
-          <Button variant="ghost" size="sm" className="pl-0 hover:bg-transparent text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100">
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            메인으로 돌아가기
-          </Button>
-        </Link>
-      </div>
-
       <Card className="w-full max-w-md shadow-lg border-gray-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
         <CardHeader className="text-center pb-2 relative">
           <CardTitle className="text-xl font-bold">내 정보</CardTitle>
