@@ -17,7 +17,7 @@ export default async function Home() {
       <main className="flex-1 w-full overflow-y-auto">
         <div className="flex flex-col items-center justify-center w-full">
           
-          <section className="w-full py-24 lg:py-32 flex flex-col items-center text-center px-4 animate-in fade-in zoom-in duration-500">
+          <section className="w-full py-24 lg:py-32 flex flex-col items-center text-center px-4 animate-in fade-in duration-500">
             <h1 className="text-4xl md:text-6xl font-bold tracking-tight lg:text-7xl mb-6 dark:text-gray-100">
               <div className="mb-3">개인정보 보호를 위한</div>
               <span className="text-primary bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-purple-600">
