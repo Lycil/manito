@@ -11,7 +11,13 @@ interface SiteHeaderProps {
 
 export default function SiteHeader({ session }: SiteHeaderProps) {
   return (
-    <header className="shrink-0 z-50 w-[calc(100%-2rem)] max-w-screen-2xl mt-4 h-16 px-6 rounded-full border border-white/20 shadow-lg flex items-center justify-between transition-all bg-white/60 dark:bg-zinc-900/60 backdrop-blur-md dark:border-zinc-800">
+    <header className="
+      fixed top-4 left-1/2 -translate-x-1/2
+      z-50 w-[calc(100%-2rem)] max-w-screen-2xl h-16 px-6 
+      rounded-full border border-white/20 shadow-lg 
+      flex items-center justify-between transition-all 
+      bg-white/60 dark:bg-zinc-900/60 backdrop-blur-md dark:border-zinc-800
+    ">
       <div className="flex items-center gap-2">
         <Link href="/" className="text-xl font-bold flex items-center gap-2 dark:text-gray-100 cursor-pointer">
           <Mail className="text-primary" /> Manito
