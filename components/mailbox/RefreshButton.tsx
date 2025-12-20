@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { RefreshCcw } from "lucide-react";
 
@@ -15,6 +15,18 @@ export default function RefreshButton() {
 
     setTimeout(() => setIsSpinning(false), 500);
   };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      console.log("자동 새로고침");
+      router.refresh();
+      
+      setIsSpinning(true);
+      setTimeout(() => setIsSpinning(false), 500);
+    }, 10000);
+
+    return () => clearInterval(interval);
+  }, [router]);
 
   return (
     <Button 
