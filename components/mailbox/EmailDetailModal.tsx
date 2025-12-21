@@ -3,9 +3,11 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Bot, User, Calendar, AlertCircle, Tag, Info, CheckCircle2 } from "lucide-react";
+import { Bot, User, Calendar, AlertCircle, Tag, Info, CheckCircle2, Mail } from "lucide-react";
 import DeleteEmailButton from "./DeleteEmailButton";
+import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface EmailData {
   _id: string;
@@ -18,6 +20,7 @@ interface EmailData {
   isImportant?: boolean;
   category?: string;
   importanceReason?: string;
+  isRead?: boolean;
 }
 
 function cleanEmailText(text: string | undefined) {
@@ -32,20 +35,67 @@ function cleanEmailText(text: string | undefined) {
 
 export default function EmailDetailModal({ mail }: { mail: EmailData }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isRead, setIsRead] = useState(mail.isRead || false);
+  const router = useRouter();
+
   const previewText = cleanEmailText(mail.text);
 
+  const handleOpenChange = async (open: boolean) => {
+    setIsOpen(open);
+
+    if (open && !isRead) {
+      setIsRead(true);
+
+      try {
+        // 읽음 처리
+        const res = await fetch(`/api/email/${mail._id}/read`, {
+          method: "PATCH",
+        });
+
+        if (res.ok) {
+          router.refresh(); 
+        }
+      } catch (error) {
+        console.error("읽음 처리 중 에러 발생:", error);
+      }
+    }
+  };
+  const markAsUnread = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+
+    setIsRead(false);
+    setIsOpen(false);
+
+    try {
+      const res = await fetch(`/api/email/${mail._id}/unread`, {
+        method: "PATCH",
+      });
+
+      if (res.ok) {
+        router.refresh();
+      }
+    } catch (error) {
+      console.error("읽지 않음 처리 실패", error);
+    }
+  };
+
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+    <Dialog open={isOpen} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
         <Card className={`
           hover:shadow-md transition-all cursor-pointer py-2 gap-1 border-l-4 
-          ${mail.isImportant ? "border-l-red-500 dark:border-l-red-500" : "border-l-transparent hover:border-l-primary"}
-          bg-white dark:bg-zinc-900 border-gray-200 dark:border-zinc-800
+          border-l-transparent hover:border-l-primary
+          ${!isRead ? "bg-white dark:bg-zinc-900 shadow-sm" : "bg-gray-50/50 dark:bg-zinc-900/40 opacity-90"}
+          border-gray-200 dark:border-zinc-800
         `}>
           <CardHeader className="flex flex-row items-start justify-between p-3 pb-1">
             <div className="flex flex-col gap-1 overflow-hidden mr-2 text-left w-full">
 
-              <div className="flex flex-wrap gap-1.5 mb-1">
+              <div className="flex flex-wrap gap-1.5 mb-1 items-center">
+                {!isRead && (
+                  <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse mr-1" title="읽지 않음" />
+                )}
+
                 <Badge 
                   variant={mail.isImportant ? "destructive" : "secondary"} 
                   className={`
@@ -54,17 +104,12 @@ export default function EmailDetailModal({ mail }: { mail: EmailData }) {
                   `}
                 >
                   {mail.isImportant ? (
-                    <>
-                      <AlertCircle className="w-3 h-3" /> 중요도 높음
-                    </>
+                    <><AlertCircle className="w-3 h-3" /> 중요도 높음</>
                   ) : (
-                    <>
-                      <CheckCircle2 className="w-3 h-3 opacity-70" /> 일반 메일
-                    </>
+                    <><CheckCircle2 className="w-3 h-3 opacity-70" /> 일반 메일</>
                   )}
                 </Badge>
 
-                {/* 카테고리 */}
                 {mail.category && (
                   <Badge variant="outline" className="h-5 px-1.5 text-[10px] font-normal text-indigo-600 dark:text-indigo-300 border-indigo-100 dark:border-indigo-900 bg-indigo-50 dark:bg-indigo-950/30">
                     <Tag className="w-3 h-3 mr-0.5 opacity-70" /> {mail.category}
@@ -72,7 +117,10 @@ export default function EmailDetailModal({ mail }: { mail: EmailData }) {
                 )}
               </div>
 
-              <CardTitle className="text-base md:text-xl font-bold truncate text-gray-900 dark:text-gray-100 w-full">
+              <CardTitle className={`
+                text-base md:text-xl truncate text-gray-900 dark:text-gray-100 w-full
+                ${!isRead ? "font-extrabold" : "font-medium text-gray-700 dark:text-gray-300"}
+              `}>
                 {mail.subject}
               </CardTitle>
               <CardDescription className="text-xs md:text-sm truncate text-gray-500 dark:text-gray-400">
@@ -97,7 +145,10 @@ export default function EmailDetailModal({ mail }: { mail: EmailData }) {
                 <span className="line-clamp-2 opacity-90">{mail.summary}</span>
               </div>
             ) : (
-              <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2 mt-1.5 break-all">
+              <p className={`
+                text-sm line-clamp-2 mt-1.5 break-all
+                ${!isRead ? "text-gray-800 dark:text-gray-300 font-medium" : "text-gray-500 dark:text-gray-500"}
+              `}>
                 {previewText.substring(0, 100) || "내용 없음"}...
               </p>
             )}
@@ -117,6 +168,15 @@ export default function EmailDetailModal({ mail }: { mail: EmailData }) {
                 {mail.category}
               </Badge>
             )}
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              onClick={markAsUnread}
+              className="h-7 text-xs text-gray-500 hover:text-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-950/30"
+            >
+              <Mail className="w-3.5 h-3.5 mr-1.5" />
+              읽지 않음 표시
+            </Button>
           </div>
 
           <DialogTitle className="text-2xl font-bold leading-tight mb-2 text-gray-900 dark:text-gray-100">

@@ -82,7 +82,8 @@ export default async function DashboardDetailPage({
                   html: mail.html,
                   isImportant: mail.isImportant,
                   category: mail.category,
-                  importanceReason: mail.importanceReason
+                  importanceReason: mail.importanceReason,
+                  isRead: mail.isRead,
                 }}
               />
             ))
