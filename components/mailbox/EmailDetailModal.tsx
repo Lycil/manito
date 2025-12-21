@@ -84,7 +84,7 @@ export default function EmailDetailModal({ mail }: { mail: EmailData }) {
       <DialogTrigger asChild>
         <Card className={`
           hover:shadow-md transition-all cursor-pointer py-2 gap-1 border-l-4 
-          border-l-transparent hover:border-l-primary
+          border-l-transparent hover:border-l-primary dark:hover:border-l-primary
           ${!isRead ? "bg-white dark:bg-zinc-900 shadow-sm" : "bg-gray-50/50 dark:bg-zinc-900/40 opacity-90"}
           border-gray-200 dark:border-zinc-800
         `}>
