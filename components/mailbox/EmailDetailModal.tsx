@@ -81,7 +81,7 @@ export default function EmailDetailModal({ mail }: { mail: EmailData }) {
             </div>
             
             <div className="flex flex-col items-end gap-1 shrink-0">
-              <span className="text-[10px] md:text-xs text-gray-400 dark:text-zinc-500 whitespace-nowrap">
+              <span suppressHydrationWarning className="text-[10px] md:text-xs text-gray-400 dark:text-zinc-500 whitespace-nowrap">
                 {new Date(mail.receivedAt).toLocaleDateString()}
               </span>
               <DeleteEmailButton emailId={mail._id} />
