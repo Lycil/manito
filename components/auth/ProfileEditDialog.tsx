@@ -82,7 +82,7 @@ export default function ProfileEditDialog({ currentName, currentEmail }: Props) 
         </Button>
       </DialogTrigger>
       
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[425px] rounded-3xl">
         <DialogHeader>
           <DialogTitle>프로필 수정</DialogTitle>
           <DialogDescription>

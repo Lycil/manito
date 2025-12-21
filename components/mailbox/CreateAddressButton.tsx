@@ -33,7 +33,7 @@ export default function CreateAddressButton() {
 
   return (
     <Button 
-      className="w-full mb-4" 
+      className="w-full mb-4 rounded-full" 
       variant="default" 
       onClick={createAddress} 
       disabled={isLoading}

@@ -60,7 +60,7 @@ export default function EditMemoButton({ addressId, currentMemo }: Props) {
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent 
-          className="bg-white dark:bg-zinc-950 dark:border-zinc-800"
+          className="bg-white dark:bg-zinc-950 dark:border-zinc-800 rounded-3xl"
           onClick={(e) => e.stopPropagation()} 
         >
           <DialogHeader>

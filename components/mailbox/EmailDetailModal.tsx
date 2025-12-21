@@ -105,7 +105,7 @@ export default function EmailDetailModal({ mail }: { mail: EmailData }) {
         </Card>
       </DialogTrigger>
 
-      <DialogContent className="sm:max-w-5xl w-[95%] md:w-full max-h-[90vh] overflow-y-auto bg-white dark:bg-zinc-950 dark:border-zinc-800">
+      <DialogContent className="sm:max-w-5xl w-[95%] md:w-full max-h-[90vh] overflow-y-auto bg-white dark:bg-zinc-950 dark:border-zinc-800 rounded-3xl">
         <DialogHeader>
           <div className="flex items-center gap-2 mb-2">
             <Badge variant="outline" className="text-xs text-gray-500 dark:text-gray-400 dark:border-zinc-700">

@@ -21,7 +21,7 @@ export default function SidebarItem({ addr }: Props) {
   return (
     <div
       className={`
-        relative group mb-3 rounded-lg border transition-colors overflow-hidden
+        relative group mb-3 rounded-xl border transition-colors overflow-hidden
         ${isSelected 
           ? "bg-indigo-50 border-indigo-200 dark:bg-indigo-950/40 dark:border-indigo-800" 
           : "bg-white hover:bg-gray-50 dark:bg-zinc-900 dark:border-zinc-800 dark:hover:bg-zinc-800/50"}
