@@ -105,8 +105,8 @@ export default function EmailDetailModal({ mail }: { mail: EmailData }) {
         </Card>
       </DialogTrigger>
 
-      <DialogContent className="sm:max-w-5xl w-[95%] md:w-full max-h-[90vh] overflow-y-auto bg-white dark:bg-zinc-950 dark:border-zinc-800 rounded-3xl">
-        <DialogHeader>
+      <DialogContent className="sm:max-w-5xl w-[95vw] md:w-full h-[90vh] flex flex-col p-0 overflow-hidden bg-white dark:bg-zinc-950 dark:border-zinc-800 rounded-3xl">
+        <DialogHeader className="p-6 pb-4 border-b dark:border-zinc-800 shrink-0">
           <div className="flex items-center gap-2 mb-2">
             <Badge variant="outline" className="text-xs text-gray-500 dark:text-gray-400 dark:border-zinc-700">
               <Calendar className="w-3 h-3 mr-1" />
@@ -128,65 +128,67 @@ export default function EmailDetailModal({ mail }: { mail: EmailData }) {
           </div>
         </DialogHeader>
 
-        <div className="space-y-6 mt-4">
-          {/* AI 분석 */}
-          {(mail.summary || mail.importanceReason) && (
-            <div className="bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-100 dark:border-indigo-900/50 rounded-lg p-5 shadow-sm">
-              <h3 className="font-bold text-indigo-700 dark:text-indigo-300 flex items-center gap-2 mb-4 text-lg">
-                <Bot className="w-5 h-5" /> AI 분석
-              </h3>
+        <div className="flex-1 overflow-y-auto p-6 pt-3 scrollbar-hide">
+          <div className="space-y-6">
+            {/* AI 분석 */}
+            {(mail.summary || mail.importanceReason) && (
+              <div className="bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-100 dark:border-indigo-900/50 rounded-lg p-5 shadow-sm">
+                <h3 className="font-bold text-indigo-700 dark:text-indigo-300 flex items-center gap-2 mb-4 text-lg">
+                  <Bot className="w-5 h-5" /> AI 분석
+                </h3>
 
-              <div className="space-y-4">
-                <div className="flex flex-wrap gap-2 items-center">
-                  <Badge variant={mail.isImportant ? "destructive" : "secondary"} className={`text-sm py-1 px-3 ${!mail.isImportant && "bg-gray-200 dark:bg-zinc-800 text-gray-600 dark:text-gray-400 hover:bg-gray-300"}`}>
-                    {mail.isImportant ? (
-                      <><AlertCircle className="w-3.5 h-3.5 mr-1.5" /> 중요도 높음</>
-                    ) : (
-                      <><CheckCircle2 className="w-3.5 h-3.5 mr-1.5" /> 일반 메일</>
-                    )}
-                  </Badge>
-                  
-                  {mail.category && (
-                    <Badge variant="outline" className="text-sm py-1 px-3 bg-white dark:bg-zinc-900 text-indigo-600 dark:text-indigo-300 border-indigo-200 dark:border-indigo-800">
-                      <Tag className="w-3.5 h-3.5 mr-1.5" /> {mail.category}
+                <div className="space-y-4">
+                  <div className="flex flex-wrap gap-2 items-center">
+                    <Badge variant={mail.isImportant ? "destructive" : "secondary"} className={`text-sm py-1 px-3 ${!mail.isImportant && "bg-gray-200 dark:bg-zinc-800 text-gray-600 dark:text-gray-400 hover:bg-gray-300"}`}>
+                      {mail.isImportant ? (
+                        <><AlertCircle className="w-3.5 h-3.5 mr-1.5" /> 중요도 높음</>
+                      ) : (
+                        <><CheckCircle2 className="w-3.5 h-3.5 mr-1.5" /> 일반 메일</>
+                      )}
                     </Badge>
+                    
+                    {mail.category && (
+                      <Badge variant="outline" className="text-sm py-1 px-3 bg-white dark:bg-zinc-900 text-indigo-600 dark:text-indigo-300 border-indigo-200 dark:border-indigo-800">
+                        <Tag className="w-3.5 h-3.5 mr-1.5" /> {mail.category}
+                      </Badge>
+                    )}
+                  </div>
+
+                  {mail.importanceReason && (
+                    <div className="flex items-start gap-2 text-sm bg-white/60 dark:bg-black/20 p-3 rounded-md border border-indigo-100/50 dark:border-indigo-900/30">
+                      <Info className="w-4 h-4 text-indigo-500 mt-0.5 shrink-0" />
+                      <span className="text-indigo-900 dark:text-indigo-200 leading-snug">
+                        <span className="font-semibold mr-1">AI 판단:</span>
+                        {mail.importanceReason}
+                      </span>
+                    </div>
+                  )}
+
+                  {mail.summary && (
+                    <div className="text-indigo-900 dark:text-indigo-100 leading-relaxed whitespace-pre-line pl-1">
+                      {mail.summary}
+                    </div>
                   )}
                 </div>
-
-                {mail.importanceReason && (
-                  <div className="flex items-start gap-2 text-sm bg-white/60 dark:bg-black/20 p-3 rounded-md border border-indigo-100/50 dark:border-indigo-900/30">
-                    <Info className="w-4 h-4 text-indigo-500 mt-0.5 shrink-0" />
-                    <span className="text-indigo-900 dark:text-indigo-200 leading-snug">
-                      <span className="font-semibold mr-1">AI 판단:</span>
-                      {mail.importanceReason}
-                    </span>
-                  </div>
-                )}
-
-                {mail.summary && (
-                  <div className="text-indigo-900 dark:text-indigo-100 leading-relaxed whitespace-pre-line pl-1">
-                    {mail.summary}
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
-
-          <div className="space-y-2">
-            {mail.html ? (
-              <div 
-                className="
-                  prose max-w-none p-6 rounded-lg border bg-white text-black overflow-x-auto
-                  [&_img]:max-w-full [&_img]:h-auto
-                  [&_table]:w-full [&_table]:max-w-full
-                "
-                dangerouslySetInnerHTML={{ __html: mail.html }} 
-              />
-            ) : (
-              <div className="text-gray-700 dark:text-gray-300 leading-relaxed min-h-[100px] p-2 whitespace-pre-wrap">
-                {mail.text || "본문 내용이 없습니다."}
               </div>
             )}
+
+            <div className="space-y-2">
+              {mail.html ? (
+                <div 
+                  className="
+                    prose max-w-none p-6 rounded-lg border bg-white text-black overflow-x-auto
+                    [&_img]:max-w-full [&_img]:h-auto
+                    [&_table]:w-full [&_table]:max-w-full
+                  "
+                  dangerouslySetInnerHTML={{ __html: mail.html }} 
+                />
+              ) : (
+                <div className="text-gray-700 dark:text-gray-300 leading-relaxed min-h-[100px] p-2 whitespace-pre-wrap">
+                  {mail.text || "본문 내용이 없습니다."}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </DialogContent>

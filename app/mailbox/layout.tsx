@@ -28,7 +28,7 @@ export default async function DashboardLayout({
   const sidebarContent = (
     <>
       <div className="p-6 border-b border-gray-200 dark:border-zinc-800">
-        <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
+        <p className="text-base font-medium text-gray-500 dark:text-gray-400">
           {session.user?.name} 님의 메일함
         </p>
       </div>
