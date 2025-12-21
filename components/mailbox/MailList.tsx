@@ -79,7 +79,7 @@ export default function MailList({ mails, addressId }: MailListProps) {
               : "아직 도착한 메일이 없습니다."}
           </p>
           
-          {!showImportantOnly && !showUnreadOnly && mails.length === 0 && (
+          {/* {!showImportantOnly && !showUnreadOnly && mails.length === 0 && (
             <>
               <div className="mt-6">
                 <TestMailButton addressId={addressId} />
@@ -88,15 +88,15 @@ export default function MailList({ mails, addressId }: MailListProps) {
                 * 위 버튼을 누르면 테스트용 가짜 메일이 발송됩니다.
               </p>
             </>
-          )}
+          )} */}
         </div>
       )}
-      
-      {mails.length > 0 && (
+
+      {/* {mails.length > 0 && (
           <div className="pt-8 flex justify-center opacity-40 hover:opacity-100 transition-opacity">
             <TestMailButton addressId={addressId} />
           </div>
-      )}
+      )} */}
     </div>
   );
 }
