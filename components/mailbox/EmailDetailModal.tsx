@@ -119,7 +119,7 @@ export default function EmailDetailModal({ mail }: { mail: EmailData }) {
 
               <CardTitle className={`
                 text-base md:text-xl truncate text-gray-900 dark:text-gray-100 w-full
-                ${!isRead ? "font-extrabold" : "font-medium text-gray-700 dark:text-gray-300"}
+                ${!isRead ? "font-bold" : "font-medium text-gray-800 dark:text-gray-300"}
               `}>
                 {mail.subject}
               </CardTitle>
